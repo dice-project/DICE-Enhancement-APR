@@ -34,9 +34,9 @@
 	<target name="main" depends="targetModels">
 
 		<java   classname="labelReplacement.LabelRep" classpath="bin">
-			<arg value="C:\wikistatsModel\APRM2MTrans\AntBuildfile\TargetModels\TargetDICELqn.model"/>
+			<arg value="C:\Users\lcroy\git\DICE-Enhancement-APR\Tulsa\V1\AntBuildfile\TargetModels\TargetDICELqn.model"/>
 			
-			<arg file="C:\wikistatsModel\APRM2MTrans\AntBuildfile\TargetModels\lqnDICE.lqnx"/>
+			<arg file="C:\Users\lcroy\git\DICE-Enhancement-APR\Tulsa\V1\AntBuildfile\TargetModels\lqnDICE.lqnx"/>
 		</java>
 	</target>
 
