@@ -1,0 +1,1 @@
+For Strom applications
