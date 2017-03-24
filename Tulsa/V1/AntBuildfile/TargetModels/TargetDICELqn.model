@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ASCII"?>
+<lqnmodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="lqnmodel" name="RootElement To lqn">
+  <processor name="storm_1" multiplicity="2" scheduling="fcfs">
+    <task name="WikistatsApplication" multiplicity="1" scheduling="ref" thinktime="0.2">
+      <entry name="Start" type="NONE"/>
+      <taskactivities>
+        <activity name="WikiArticleSpout" hostdemandmean="3.1" boundtoentry="Start"/>
+        <activity name="LinkCounterBolt" hostdemandmean="10.0"/>
+        <activity name="LinksPerPageCassandraWriter" hostdemandmean="30.0"/>
+        <activity name="CategoriesExtractBolt" hostdemandmean="45.0"/>
+        <activity name="CategoriesPerPageCassandraWriter" hostdemandmean="20.0"/>
+        <activity name="CategoriesSplitBolt" hostdemandmean="2.0"/>
+        <activity name="CategoryAggrBolt" hostdemandmean="10.0"/>
+        <activity name="PagesPerCategoryCassandraWriter" hostdemandmean="10.0"/>
+        <precedence>
+          <pre>
+            <activityRPre name="WikiArticleSpout"/>
+          </pre>
+          <postand>
+            <activityRPostAnd name="LinkCounterBolt"/>
+            <activityRPostAnd name="CategoriesExtractBolt"/>
+          </postand>
+        </precedence>
+        <precedence>
+          <pre>
+            <activityRPre name="LinkCounterBolt"/>
+          </pre>
+          <post>
+            <activityRPost name="LinksPerPageCassandraWriter"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activityRPre name="CategoriesExtractBolt"/>
+          </pre>
+          <postand>
+            <activityRPostAnd name="CategoriesPerPageCassandraWriter"/>
+            <activityRPostAnd name="CategoriesSplitBolt"/>
+          </postand>
+        </precedence>
+        <precedence>
+          <pre>
+            <activityRPre name="CategoriesSplitBolt"/>
+          </pre>
+          <post>
+            <activityRPost name="CategoryAggrBolt"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activityRPre name="CategoryAggrBolt"/>
+          </pre>
+          <post>
+            <activityRPost name="PagesPerCategoryCassandraWriter"/>
+          </post>
+        </precedence>
+      </taskactivities>
+    </task>
+  </processor>
+</lqnmodel>
