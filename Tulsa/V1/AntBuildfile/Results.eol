@@ -93,7 +93,7 @@ var resEntries= e.children.selectOne(a|a.tagName="result-entry");
 	            "stereotypes are : ".print()+stereotype.println(); 
         	   if(stereotype.isDefined()){ //--3--
         	      for(s in stereotype){           
-	     	       if(s.name="PaStep"){//--4--
+	     	       if(s.name="GaStep"){//--4--
 	    	    	    "Selected Attributes are :".print()+s.getAllAttributes().name.println();
 	    	 	        //if(s.getAllAttributes().selectOne(a|a.name="Utilization").isDefined()){}
 	                 	c.setValue(s,"utilization",Sequence{entryUtilization+""});
@@ -111,7 +111,7 @@ var resEntries= e.children.selectOne(a|a.tagName="result-entry");
 	            "stereotypes are : ".print()+stereotype.println(); 
         	   if(stereotype.isDefined()){ //--3--
         	      for(s in stereotype){           
-	     	       if(s.name="PaStep"){//--4--
+	     	       if(s.name="GaStep"){//--4--
 	    	    	    "Selected Attributes are :".print()+s.getAllAttributes().name.println();
 	    	 	        //if(s.getAllAttributes().selectOne(a|a.name="Utilization").isDefined()){}
 	                 	c.setValue(s,"utilization",Sequence{entryUtilization+""});
@@ -175,7 +175,7 @@ var resEntries= e.children.selectOne(a|a.tagName="result-entry");
 	            "stereotypes are : ".print()+stereotype.println(); 
         	   if(stereotype.isDefined()){ //--3--
         	      for(s in stereotype){           
-	     	       if(s.name="PaStep"){//--4--
+	     	       if(s.name="GaStep"){//--4--
 	    	    	    "Selected Attributes are :".print()+s.getAllAttributes().name.println();
 	    	 	        //if(s.getAllAttributes().selectOne(a|a.name="Utilization").isDefined()){}
 	                 	c.setValue(s,"utilization",Sequence{activityUtilization+""});
@@ -194,7 +194,7 @@ var resEntries= e.children.selectOne(a|a.tagName="result-entry");
 	            "stereotypes are : ".print()+stereotype.println(); 
         	   if(stereotype.isDefined()){ //--3--
         	      for(s in stereotype){           
-	     	       if(s.name="PaStep"){//--4--
+	     	       if((s.name="StormSpout")or(s.name="StormBolt")){//--4--
 	    	    	    "Selected Attributes are :".print()+s.getAllAttributes().name.println();
 	    	 	        //if(s.getAllAttributes().selectOne(a|a.name="Utilization").isDefined()){}
 	                 	c.setValue(s,"utilization",Sequence{activityUtilization+""});
