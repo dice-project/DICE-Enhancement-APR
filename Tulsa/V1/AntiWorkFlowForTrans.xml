@@ -3,7 +3,7 @@
 	<target name="loadModels">
 		<epsilon.emf.loadModel 
 	 			        name="UML" 
-	 			        modelFile="AntBuildfile/SourceModel/wikistats.uml" 		      
+	 			        modelFile="AntBuildfile/SourceModel/Tulsa_Example.uml" 		      
 	 			 	    metamodelUri="http://www.eclipse.org/uml2/5.0.0/UML"
 	 				    read="true" store="true"/>
 		<epsilon.emf.register file="AntBuildfile/MetaModels/lqnmodel.ecore"/>
