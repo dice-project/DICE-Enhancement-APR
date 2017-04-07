@@ -1,3 +1,3 @@
 UMLExamples: Examples of Storm Applications for Tulsa
 
-V1: Tulsa source code
+V1: Source code of Tulsa
