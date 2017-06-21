@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DICE-APR>
     <metric>
-        <parameter name='inputLQNModel' value='C:/Users/lcroy/Documents/MATLAB/Word_Count.xml' />
-        <parameter name='inputSolvedLQNModel' value='C:/Users/lcroy/Documents/MATLAB/Word_Count_line.xml' />
+        <parameter name='inputLQNModel' value='C:/Users/lcroy/Documents/MATLAB/wikistats_V2.xml' />
+        <parameter name='inputSolvedLQNModel' value='C:/Users/lcroy/Documents/MATLAB/wikistats_V2_line.xml' />
         <parameter name='ThMaxCall' value='2' />
         <parameter name='ThMaxResT' value='10.0' />
         <parameter name='ThMaxEntry' value='2' />
