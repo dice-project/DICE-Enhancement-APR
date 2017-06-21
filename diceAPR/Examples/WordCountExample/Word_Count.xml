@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<lqn-model  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/usr/local/share/lqns/lqn.xsd" name="RootElement To lqn">
+<processor multiplicity="1" name="Cluster" quantum="0.001" scheduling="ps" speed-factor="1.0">
+    <task activity-graph="YES" multiplicity="1" name="CPU_Task" scheduling="inf" think-time="0.0">
+      <entry name="SentenceSpoutEntry" type="PH1PH2">
+        <entry-phase-activities>
+          <activity host-demand-mean="3.1" name="SentenceSpoutActivity" phase="1"/>
+        </entry-phase-activities>
+      </entry>
+      <entry name="SplitBoltEntry" type="PH1PH2">
+        <entry-phase-activities>
+          <activity host-demand-mean="45.0" name="SplitBoltActivity" phase="1"/>
+        </entry-phase-activities>
+      </entry>
+      <entry name="WordCountBoltEntry" type="PH1PH2">
+        <entry-phase-activities>
+          <activity host-demand-mean="2.0" name="WordCountBoltActivity" phase="1"/>
+        </entry-phase-activities>
+      </entry>
+      <service name="MyService"/>
+    </task>
+  </processor>  
+  <processor name="storm_1" multiplicity="2" scheduling="fcfs">
+    <task name="WordCount" multiplicity="1" scheduling="ref" think-time="0.2">
+      <entry name="Start" type="NONE">
+        <service-time-distribution max="10.0" min="0.0" phase="1"/>
+      </entry>
+        <task-activities>
+            <activity host-demand-mean="0.0" name="OP1" bound-to-entry="Start"/>
+            <activity host-demand-mean="0.0" name="SentenceSpoutActivity">
+                <synch-call dest="SentenceSpoutEntry" calls-mean="1.0"/>
+            </activity>
+            <activity host-demand-mean="0.0" name="SplitBoltActivity">
+              <synch-call dest="SplitBoltCall" calls-mean="1.0"/>
+            </activity>
+           <precedence>
+                <pre>
+                    <activity name="SentenceSpoutActivity"/>
+                </pre>
+                <post>
+                    <activity name="SplitBoltActivity"/>
+                </post>
+            </precedence>
+            <precedence>
+                <pre>
+                    <activity name="OP1"/>
+                </pre>
+                <post>
+                    <activity name="SentenceSpoutActivity"/>
+                </post>
+            </precedence>
+        </task-activities>
+    </task>
+  </processor>
+  <processor multiplicity="1" name="SplitBolt" scheduling="fcfs">
+    <task activity-graph="YES" multiplicity="1" name="SplitBoltCall" scheduling="inf" think-time="0.0">
+      <entry name="SplitBoltCall" type="NONE"/>
+      <service name="MyService"/>
+      <task-activities>
+        <activity host-demand-mean="0.0" name="OP2" bound-to-entry="SplitBoltCall"/>
+        <activity host-demand-mean="0.0" name="SplitBoltActivity">
+           <synch-call dest="SplitBoltEntry" calls-mean="1.0"/>
+        </activity>
+       <activity host-demand-mean="0.0" name="WordCountBoltActivity">
+           <synch-call dest="WordCountBoltCall" calls-mean="1.0"/>
+       </activity>
+        <precedence>
+          <pre>
+            <activity name="SplitBoltActivity"/>
+          </pre>
+          <post>
+            <activity name="WordCountBoltActivity"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP2"/>
+          </pre>
+          <post>
+            <activity name="SplitBoltActivity"/>
+          </post>
+        </precedence>
+        <reply-entry name="SplitBoltCall">
+          <reply-activity name="WordCountBoltActivity"/>
+        </reply-entry>
+      </task-activities>
+    </task>
+  </processor>
+  <processor multiplicity="1" name="WordCountBolt" scheduling="fcfs">
+    <task activity-graph="YES" multiplicity="1" name="WordCountBoltCall" scheduling="inf" think-time="0.0">
+      <entry name="WordCountBoltCall" type="NONE"/>
+      <service name="MyService"/>
+      <task-activities>
+        <activity host-demand-mean="0.0" name="OP3" bound-to-entry="WordCountBoltCall"/>
+        <activity host-demand-mean="0.0" name="WordCountBoltActivity">
+           <synch-call dest="WordCountBoltEntry" calls-mean="1.0"/>
+        </activity>
+        <precedence>
+          <pre>
+            <activity name="OP3"/>
+          </pre>
+          <post>
+            <activity name="WordCountBoltActivity"/>
+          </post>
+        </precedence>
+        <reply-entry name="WordCountBoltCall">
+          <reply-activity name="WordCountBoltActivity"/>
+        </reply-entry>
+      </task-activities>
+    </task>
+  </processor> 
+</lqn-model>

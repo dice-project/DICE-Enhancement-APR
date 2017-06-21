@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<lqn-model  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="/usr/local/share/lqns/lqn.xsd" name="RootElement To lqn">
+ <processor multiplicity="1" name="CPU_Processor" quantum="0.001" scheduling="ps" speed-factor="1.0">
+    <task activity-graph="YES" multiplicity="1" name="CPU_Task" scheduling="inf" think-time="0.0">
+      <entry name="CPU_Entry" type="NONE">
+        <entry-phase-activities>
+          <activity host-demand-mean="0.0" name="CPU_Activity" phase="1"/>
+        </entry-phase-activities>
+      </entry>
+      <entry name="StrartPointEntry" type="PH1PH2">
+        <entry-phase-activities>
+          <activity host-demand-mean="0.011" name="StartPointActivity" phase="1"/>
+        </entry-phase-activities>
+      </entry>
+      <entry name="AC1Entry" type="PH1PH2">
+        <entry-phase-activities>
+          <activity host-demand-mean="0.011" name="AC1Activity" phase="1"/>
+        </entry-phase-activities>
+      </entry>
+      <entry name="AC2Entry" type="PH1PH2">
+        <entry-phase-activities>
+          <activity host-demand-mean="0.011" name="AC2Activity" phase="1"/>
+        </entry-phase-activities>
+      </entry>
+      <entry name="AC3Entry" type="PH1PH2">
+        <entry-phase-activities>
+          <activity host-demand-mean="0.011" name="AC3Activity" phase="1"/>
+        </entry-phase-activities>
+      </entry>
+      <entry name="AC4Entry" type="PH1PH2">
+        <entry-phase-activities>
+          <activity host-demand-mean="0.011" name="AC4Activity" phase="1"/>
+        </entry-phase-activities>
+      </entry>
+      <entry name="AC5Entry" type="PH1PH2">
+        <entry-phase-activities>
+          <activity host-demand-mean="0.011" name="AC5Activity" phase="1"/>
+        </entry-phase-activities>
+      </entry>
+      <entry name="AC6Entry" type="PH1PH2">
+        <entry-phase-activities>
+          <activity host-demand-mean="0.011" name="AC6Activity" phase="1"/>
+        </entry-phase-activities>
+      </entry>
+      <entry name="AC7Entry" type="PH1PH2">
+        <entry-phase-activities>
+          <activity host-demand-mean="0.011" name="AC7Activity" phase="1"/>
+        </entry-phase-activities>
+      </entry>
+      <service name="MyService"/>
+    </task>
+  </processor>
+  <processor multiplicity="1" name="USAGE_DELAY_Processor" scheduling="inf">
+    <task activity-graph="YES" multiplicity="1" name="USAGE_DELAY_Task" scheduling="inf" think-time="0.0">
+      <entry name="USAGE_DELAY0_Entry" type="PH1PH2">
+        <entry-phase-activities>
+          <activity host-demand-mean="0.0" name="USAGE_DELAY0_Activity" phase="1"/>
+        </entry-phase-activities>
+      </entry>
+      <service name="MyService"/>
+    </task>
+  </processor>
+  <processor multiplicity="1" name="Server_Spout" scheduling="fcfs">
+    <task activity-graph="YES" multiplicity="100" name="WikiArticleSpout" scheduling="ref" think-time="1">
+      <entry name="StrartPoint" type="NONE">
+        <service-time-distribution max="10.0" min="0.0" phase="1"/>
+      </entry>
+      <service name="MyService"/>
+      <task-activities>
+        <activity host-demand-mean="0.0" name="OP1" bound-to-entry="StrartPoint"/>
+        <activity host-demand-mean="0.0" name="OP11">
+         <synch-call dest="StrartPointEntry" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="call1">
+          <synch-call dest="AC1" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="call6">
+          <synch-call dest="AC3" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="2.0" name="Stop1"/>
+        <activity host-demand-mean="2.0" name="Stop2"/>
+        <precedence>
+          <pre>
+            <activity name="call1"/>
+          </pre>
+          <post>
+            <activity name="Stop1"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="call6"/>
+          </pre>
+          <post>
+            <activity name="Stop2"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP11"/>
+          </pre>
+          <post-OR>
+            <activity name="call1" prob="0.5"/>
+            <activity name="call6" prob="0.5"/>
+          </post-OR>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP1"/>
+          </pre>
+          <post>
+            <activity name="OP11"/>
+          </post>
+        </precedence>
+      </task-activities>
+    </task>
+  </processor>
+   <processor multiplicity="1" name="Server_CateAgg3" scheduling="fcfs">
+    <task activity-graph="YES" multiplicity="1" name="PagesPerCategoryCassandraWriter" scheduling="inf" think-time="0.0">
+      <entry name="AC7" type="NONE"/>
+      <service name="MyService"/>
+      <task-activities>
+        <activity host-demand-mean="0.0" name="OP8" bound-to-entry="AC7"/>
+        <activity host-demand-mean="0.0" name="OP88">
+           <synch-call dest="AC7Entry" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="Stop9"/>
+        <precedence>
+          <pre>
+            <activity name="OP88"/>
+          </pre>
+          <post>
+            <activity name="Stop9"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP8"/>
+          </pre>
+          <post>
+            <activity name="OP88"/>
+          </post>
+        </precedence>
+        <reply-entry name="AC7">
+          <reply-activity name="Stop9"/>
+        </reply-entry>
+      </task-activities>
+    </task>
+  </processor> 
+  <processor multiplicity="1" name="Server_CateAgg2" scheduling="fcfs">
+    <task activity-graph="YES" multiplicity="1" name="CategoryAggrBolt" scheduling="inf" think-time="0.0">
+      <entry name="AC6" type="NONE"/>
+      <service name="MyService"/>
+      <task-activities>
+        <activity host-demand-mean="0.0" name="OP7" bound-to-entry="AC6"/>
+        <activity host-demand-mean="0.0" name="OP77">
+           <synch-call dest="AC6Entry" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="OP777">
+           <synch-call dest="AC7" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="Stop8"/>
+        <precedence>
+          <pre>
+            <activity name="OP777"/>
+          </pre>
+          <post>
+            <activity name="Stop8"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP77"/>
+          </pre>
+          <post>
+            <activity name="OP777"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP7"/>
+          </pre>
+          <post>
+            <activity name="OP77"/>
+          </post>
+        </precedence>
+        <reply-entry name="AC6">
+          <reply-activity name="Stop8"/>
+        </reply-entry>
+      </task-activities>
+    </task>
+  </processor> 
+  <processor multiplicity="1" name="Server_CateAgg1" scheduling="fcfs">
+    <task activity-graph="YES" multiplicity="1" name="CategoriesSplitBolt" scheduling="inf" think-time="0.0">
+      <entry name="AC5" type="NONE"/>
+      <service name="MyService"/>
+      <task-activities>
+        <activity host-demand-mean="0.0" name="OP6" bound-to-entry="AC5"/>
+        <activity host-demand-mean="0.0" name="OP66">
+           <synch-call dest="AC5Entry" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="OP666">
+           <synch-call dest="AC6" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="Stop7"/>
+        <precedence>
+          <pre>
+            <activity name="OP666"/>
+          </pre>
+          <post>
+            <activity name="Stop7"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP66"/>
+          </pre>
+          <post>
+            <activity name="OP666"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP6"/>
+          </pre>
+          <post>
+            <activity name="OP66"/>
+          </post>
+        </precedence>
+        <reply-entry name="AC5">
+          <reply-activity name="Stop7"/>
+        </reply-entry>
+      </task-activities>
+    </task>
+  </processor> 
+   <processor multiplicity="1" name="Server_CateExtra2" scheduling="fcfs">
+    <task activity-graph="YES" multiplicity="1" name="CategoriesPerPageCassandraWriter" scheduling="inf" think-time="0.0">
+      <entry name="AC2" type="NONE"/>
+      <service name="MyService"/>
+      <task-activities>
+        <activity host-demand-mean="0.0" name="OP3" bound-to-entry="AC2"/>
+        <activity host-demand-mean="0.0" name="OP33">
+           <synch-call dest="AC2Entry" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="Stop6"/>
+        <precedence>
+          <pre>
+            <activity name="OP33"/>
+          </pre>
+          <post>
+            <activity name="Stop6"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP3"/>
+          </pre>
+          <post>
+            <activity name="OP33"/>
+          </post>
+        </precedence>
+        <reply-entry name="AC2">
+          <reply-activity name="Stop6"/>
+        </reply-entry>
+      </task-activities>
+    </task>
+  </processor> 
+  <processor multiplicity="1" name="Server_CateExtra1" scheduling="fcfs">
+    <task activity-graph="YES" multiplicity="1" name="CategoriesExtractBolt" scheduling="inf" think-time="0.0">
+      <entry name="AC1" type="NONE"/>
+      <service name="MyService"/>
+      <task-activities>
+        <activity host-demand-mean="0.0" name="OP2" bound-to-entry="AC1"/>
+        <activity host-demand-mean="0.0" name="OP22">
+          <synch-call dest="AC1Entry" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="OP222">
+          <synch-call dest="AC2" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="OP2222">
+          <synch-call dest="AC5" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="Stop4"/>
+        <activity host-demand-mean="0.0" name="Stop44"/>
+        <precedence>
+          <pre>
+            <activity name="OP2222"/>
+          </pre>
+          <post>
+            <activity name="Stop44"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP222"/>
+          </pre>
+          <post>
+            <activity name="Stop4"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP22"/>
+          </pre>
+          <post-OR>
+            <activity name="OP222" prob="0.5"/>
+            <activity name="OP2222" prob="0.5"/>
+          </post-OR>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP2"/>
+          </pre>
+          <post>
+            <activity name="OP22"/>
+          </post>
+        </precedence>
+        <reply-entry name="AC1">
+          <reply-activity name="Stop4"/>
+        </reply-entry>
+      </task-activities>
+    </task>
+  </processor>
+  <processor multiplicity="1" name="Server_Link2" scheduling="fcfs">
+    <task activity-graph="YES" multiplicity="1" name="LinksPerPageCassandraWriter" scheduling="inf" think-time="0.0">
+      <entry name="AC4" type="NONE"/>
+      <service name="MyService"/>
+      <task-activities>
+        <activity host-demand-mean="0.0" name="OP5" bound-to-entry="AC4"/>
+        <activity host-demand-mean="0.0" name="OP55">
+           <synch-call dest="AC4Entry" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="Stop5"/>
+        <precedence>
+          <pre>
+            <activity name="OP55"/>
+          </pre>
+          <post>
+            <activity name="Stop5"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP5"/>
+          </pre>
+          <post>
+            <activity name="OP55"/>
+          </post>
+        </precedence>
+        <reply-entry name="AC4">
+          <reply-activity name="Stop5"/>
+        </reply-entry>
+      </task-activities>
+    </task>
+  </processor> 
+  <processor multiplicity="1" name="Server_Link1" scheduling="fcfs">
+    <task activity-graph="YES" multiplicity="1" name="LinkCounterBolt" scheduling="inf" think-time="0.0">
+      <entry name="AC3" type="NONE"/>
+      <service name="MyService"/>
+      <task-activities>
+        <activity host-demand-mean="0.0" name="OP4" bound-to-entry="AC3"/>
+        <activity host-demand-mean="0.0" name="OP44">
+          <synch-call dest="AC3Entry" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="OP444">
+          <synch-call dest="AC4" calls-mean="1.0"/>
+        </activity>
+        <activity host-demand-mean="0.0" name="Stop3"/>
+        <precedence>
+          <pre>
+            <activity name="OP444"/>
+          </pre>
+          <post>
+            <activity name="Stop3"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP44"/>
+          </pre>
+          <post>
+            <activity name="OP444"/>
+          </post>
+        </precedence>
+        <precedence>
+          <pre>
+            <activity name="OP4"/>
+          </pre>
+          <post>
+            <activity name="OP44"/>
+          </post>
+        </precedence>
+        <reply-entry name="AC3">
+          <reply-activity name="Stop3"/>
+        </reply-entry>
+      </task-activities>
+    </task>
+  </processor>
+</lqn-model>   

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cqn-model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="CQNmodel">
+   <processor name="CPU_Processor" util="9.999999999999999e-01"/>
+   <processor name="Server_Spout" util="1.136478309987162e+01"/>
+   <workload name="Server_Spout" responseTime="7.799850709502548e+00" throughput="1.136478309987162e+01">
+      <station name="CPU_Processor" responseTime="7.799850709502548e+00"/>
+      <station name="Server_Spout" responseTime="1.000000000000000e+00"/>
+      <responseTimeDistribution>
+         <percentile level="1.000000000000000e-01" value="4.539335148542807e+00"/>
+         <percentile level="2.000000000000000e-01" value="5.436497424424636e+00"/>
+         <percentile level="3.000000000000000e-01" value="6.154253221243250e+00"/>
+         <percentile level="4.000000000000000e-01" value="6.816537160614648e+00"/>
+         <percentile level="5.000000000000000e-01" value="7.477526673524505e+00"/>
+         <percentile level="6.000000000000000e-01" value="8.180031790555018e+00"/>
+         <percentile level="7.000000000000000e-01" value="8.978688459929961e+00"/>
+         <percentile level="8.000000000000000e-01" value="9.976891436447875e+00"/>
+         <percentile level="9.000000000000000e-01" value="1.147690995682033e+01"/>
+      </responseTimeDistribution>
+   </workload>
+   <Entry name="Server_CateAgg3" responseTime="9.749813386878184e-01" throughput="1.136319568182673e+01">
+      <responseTimeDistribution>
+         <percentile level="1.000000000000000e-01" value="1.027527779549109e-01"/>
+         <percentile level="2.000000000000000e-01" value="2.177295089270139e-01"/>
+         <percentile level="3.000000000000000e-01" value="3.477606810546929e-01"/>
+         <percentile level="4.000000000000000e-01" value="4.983728480588854e-01"/>
+         <percentile level="5.000000000000000e-01" value="6.763377213249799e-01"/>
+         <percentile level="6.000000000000000e-01" value="8.937621328046758e-01"/>
+         <percentile level="7.000000000000000e-01" value="1.174425716981738e+00"/>
+         <percentile level="8.000000000000000e-01" value="1.569469447585973e+00"/>
+         <percentile level="9.000000000000000e-01" value="2.245640755801714e+00"/>
+      </responseTimeDistribution>
+   </Entry>
+   <Entry name="Server_CateAgg2" responseTime="1.949962677375637e+00" throughput="1.136279769544113e+01">
+      <responseTimeDistribution>
+         <percentile level="1.000000000000000e-01" value="5.183390872697818e-01"/>
+         <percentile level="2.000000000000000e-01" value="8.037584026146807e-01"/>
+         <percentile level="3.000000000000000e-01" value="1.069910649584736e+00"/>
+         <percentile level="4.000000000000000e-01" value="1.341999527815977e+00"/>
+         <percentile level="5.000000000000000e-01" value="1.636382897335162e+00"/>
+         <percentile level="6.000000000000000e-01" value="1.971978418185700e+00"/>
+         <percentile level="7.000000000000000e-01" value="2.378376826044834e+00"/>
+         <percentile level="8.000000000000000e-01" value="2.919700439873167e+00"/>
+         <percentile level="9.000000000000000e-01" value="3.792540590557002e+00"/>
+      </responseTimeDistribution>
+   </Entry>
+   <Entry name="Server_CateAgg1" responseTime="2.924944016063455e+00" throughput="1.136284761368406e+01">
+      <responseTimeDistribution>
+         <percentile level="1.000000000000000e-01" value="1.074489946039635e+00"/>
+         <percentile level="2.000000000000000e-01" value="1.496604675791949e+00"/>
+         <percentile level="3.000000000000000e-01" value="1.865901241077542e+00"/>
+         <percentile level="4.000000000000000e-01" value="2.227950591952627e+00"/>
+         <percentile level="5.000000000000000e-01" value="2.607212992854322e+00"/>
+         <percentile level="6.000000000000000e-01" value="3.027747900004334e+00"/>
+         <percentile level="7.000000000000000e-01" value="3.525146644486016e+00"/>
+         <percentile level="8.000000000000000e-01" value="4.172144461632124e+00"/>
+         <percentile level="9.000000000000000e-01" value="5.189424608207175e+00"/>
+      </responseTimeDistribution>
+   </Entry>
+   <Entry name="Server_CateExtra2" responseTime="9.749813386878186e-01" throughput="1.136331856080329e+01">
+      <responseTimeDistribution>
+         <percentile level="1.000000000000000e-01" value="1.027528119123370e-01"/>
+         <percentile level="2.000000000000000e-01" value="2.177293487923602e-01"/>
+         <percentile level="3.000000000000000e-01" value="3.477611498329631e-01"/>
+         <percentile level="4.000000000000000e-01" value="4.983721542831912e-01"/>
+         <percentile level="5.000000000000000e-01" value="6.763383720125253e-01"/>
+         <percentile level="6.000000000000000e-01" value="8.937634070802849e-01"/>
+         <percentile level="7.000000000000000e-01" value="1.174431423118552e+00"/>
+         <percentile level="8.000000000000000e-01" value="1.569448158444381e+00"/>
+         <percentile level="9.000000000000000e-01" value="2.245628471203966e+00"/>
+      </responseTimeDistribution>
+   </Entry>
+   <Entry name="Server_CateExtra1" responseTime="2.924944016063455e+00" throughput="1.136399427351876e+01">
+      <responseTimeDistribution>
+         <percentile level="1.000000000000000e-01" value="2.371446146724530e+00"/>
+         <percentile level="2.000000000000000e-01" value="3.012246462931095e+00"/>
+         <percentile level="3.000000000000000e-01" value="3.542667478301807e+00"/>
+         <percentile level="4.000000000000000e-01" value="4.044027332039443e+00"/>
+         <percentile level="5.000000000000000e-01" value="4.554182298480594e+00"/>
+         <percentile level="6.000000000000000e-01" value="5.105731746621773e+00"/>
+         <percentile level="7.000000000000000e-01" value="5.743264585261494e+00"/>
+         <percentile level="8.000000000000000e-01" value="6.553117115807591e+00"/>
+         <percentile level="9.000000000000000e-01" value="7.793928707342030e+00"/>
+      </responseTimeDistribution>
+   </Entry>
+   <Entry name="Server_Link2" responseTime="9.749813386878186e-01" throughput="1.136450375513121e+01">
+      <responseTimeDistribution>
+         <percentile level="1.000000000000000e-01" value="1.027526418353459e-01"/>
+         <percentile level="2.000000000000000e-01" value="2.177191352423539e-01"/>
+         <percentile level="3.000000000000000e-01" value="3.478485506240359e-01"/>
+         <percentile level="4.000000000000000e-01" value="4.981680847831792e-01"/>
+         <percentile level="5.000000000000000e-01" value="6.764211017776023e-01"/>
+         <percentile level="6.000000000000000e-01" value="8.939174869457772e-01"/>
+         <percentile level="7.000000000000000e-01" value="1.174518574516816e+00"/>
+         <percentile level="8.000000000000000e-01" value="1.569179007629364e+00"/>
+         <percentile level="9.000000000000000e-01" value="2.245534573398591e+00"/>
+      </responseTimeDistribution>
+   </Entry>
+   <Entry name="Server_Link1" responseTime="1.949962677375637e+00" throughput="1.136386496189083e+01">
+      <responseTimeDistribution>
+         <percentile level="1.000000000000000e-01" value="5.183152415693687e-01"/>
+         <percentile level="2.000000000000000e-01" value="8.036931237061429e-01"/>
+         <percentile level="3.000000000000000e-01" value="1.069930185369704e+00"/>
+         <percentile level="4.000000000000000e-01" value="1.342095747422631e+00"/>
+         <percentile level="5.000000000000000e-01" value="1.636544253582528e+00"/>
+         <percentile level="6.000000000000000e-01" value="1.971731420172792e+00"/>
+         <percentile level="7.000000000000000e-01" value="2.378508845620705e+00"/>
+         <percentile level="8.000000000000000e-01" value="2.919794792445934e+00"/>
+         <percentile level="9.000000000000000e-01" value="3.792936983160049e+00"/>
+      </responseTimeDistribution>
+   </Entry>
+</cqn-model>

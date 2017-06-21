@@ -1,0 +1,29 @@
+ 
+-----------------------------------------------------------------------
+APR module - 1.0.0 - copyright 2012-2017 (c) - Imperial College London.
+-----------------------------------------------------------------------
+Anti-Pattern Detection Start : 
+=======================================================================
+AP1: Infinite Wait.
+AP1 (IW): Syncall Call Checking - file: C:\Users\cli5\Documents\MATLAB\diceAPDR\Examples\WordCountExample\Word_Count.xml
+Number of Syn-calls is smaller than thresholds.
+-----------------------------------------------------------------------
+AP1 (IW) is not found in LQN model.
+-----------------------------------------------------------------------
+AP2: Excessive Calculation.
+AP2 (EC): Entry Checking - file: C:\Users\cli5\Documents\MATLAB\diceAPDR\Examples\WordCountExample\Word_Count.xml
+The following processor has too many entries.
+processors: Cluster; number of components: 3
+AP2 (EC): Utilization Checking - file: C:\Users\cli5\Documents\MATLAB\diceAPDR\Examples\WordCountExample\Word_Count_line.xml
+-----------------------------------------------------------------------
+AP2 (EC) is found in LQN model.
+-----------------------------------------------------------------------
+Utilization of the following processor is higher than thresholds.
+processors: Cluster, utilization: 0.996099134446812
+-----------------------------------------------------------------------
+Refactoring suggestions for AP2 (EC) 
+-----------------------------------------------------------------------
+Migrating 2 components from Cluster to a new server.
+=======================================================================
+Anti-Pattern Detection End.
+-----------------------------------------------------------------------
