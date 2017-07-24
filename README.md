@@ -6,5 +6,3 @@ APR (Anti-Patterns & Refactoring) module, a tool for anti-patterns detection and
 Please check out the [wiki](https://github.com/dice-project/DICE-Enhancement-APR/wiki) for installation and user manuals.
 
 ##License##
-
-DICE-APR is licensed under the 
