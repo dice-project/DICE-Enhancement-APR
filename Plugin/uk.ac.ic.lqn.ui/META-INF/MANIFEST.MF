@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Enhancement Tool UI Plugin
+Bundle-SymbolicName: uk.ac.ic.lqn.ui;singleton:=true
+Bundle-Version: 0.1.0.qualifier
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.resources,
+ uk.ac.ic.lqn;bundle-version="0.1.0",
+ org.eclipse.epsilon.eol.engine;bundle-version="1.4.0",
+ org.eclipse.epsilon.eol.tools;bundle-version="1.4.0",
+ org.eclipse.epsilon.emc.emf;bundle-version="1.4.0",
+ org.eclipse.uml2.uml,
+ org.eclipse.epsilon.etl.dt;bundle-version="1.4.0",
+ org.eclipse.epsilon.etl.engine;bundle-version="1.4.0",
+ org.eclipse.epsilon.eol.dt.tools;bundle-version="1.4.0",
+ org.eclipse.ui.console
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7,
+ JavaSE-1.8
+Bundle-ClassPath: lib/APDR.jar,
+ lib/DICEFG.jar,
+ lib/javabuilder.jar,
+ .
+Bundle-Vendor: Imperial College London

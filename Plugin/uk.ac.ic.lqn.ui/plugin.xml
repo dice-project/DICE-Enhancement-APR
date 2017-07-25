@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            id="uk.ac.ic.lqn.ui.contribution1">
+         <menu
+               label="Enhancement Tool"
+               path="additions"
+               id="uk.ac.ic.lqn.ui.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="APR"
+               class="uk.ac.ic.lqn.ui.popup.actions.TransformAction"
+               menubarPath="uk.ac.ic.lqn.ui.menu1/group1"
+               enablesFor="1"
+               id="uk.ac.ic.lqn.ui.newAction">
+         </action>
+         <action
+               label="FG"
+               class="uk.ac.ic.lqn.ui.popup.actions.FGAction"
+               menubarPath="uk.ac.ic.lqn.ui.menu1/group1"
+               enablesFor="1"
+               id="uk.ac.ic.lqn.ui.FGAction">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

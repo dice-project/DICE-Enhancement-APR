@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated lqnmodel -->
+      <package
+            uri="http://uk.ac.ic.lqn/lqnmodel/1.0"
+            class="uk.ac.ic.lqn.lqnmodel.LqnmodelPackage"
+            genModel="model/lqnmodel.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Lqn2umlTrace -->
+      <package
+            uri="http://uk.ac.ic.lqn/lqn2umlTrace/1.0"
+            class="uk.ac.ic.lqn.Lqn2umlTrace.Lqn2umlTracePackage"
+            genModel="model/Lqn2umlTrace.genmodel"/>
+   </extension>
+
+</plugin>
