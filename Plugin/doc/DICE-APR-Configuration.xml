@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DICE-APR>
+    <metric>
+        <parameter name='ThMaxCall' value='2' />
+        <parameter name='ThMaxResT' value='10.0' />
+        <parameter name='ThMaxEntry' value='2' />
+        <parameter name='ThMaxUtil' value='0.2' />
+    </metric>
+</DICE-APR>

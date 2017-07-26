@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fg>
+    <configuration>
+        <parameter type='Verbose' value='1' />
+    </configuration>
+    <dataset>
+        <period start='1464706685564' end='1464706685564' />
+        <file type='ResourceList' path='C:\Users\lcroy\runtime-EclipseApplication\Test\spark-resources.json'/>
+        <file type='ResourceDataFile' path='C:\Users\lcroy\runtime-EclipseApplication\Test\spark-resdata.json'/>
+        <file type='ResourceClassList' path='C:\Users\lcroy\runtime-EclipseApplication\Test\spark-resclasses.json'/>
+        <file type='SystemDataFile' path='C:\Users\lcroy\runtime-EclipseApplication\Test\spark-sysdata.json'/>
+        <file type='SystemClassList' path='C:\Users\lcroy\runtime-EclipseApplication\Test\spark-sysclasses.json'/>
+    </dataset>
+    <fitting type='fit-mean' flags=''>
+        <resource name='spark-testbed' flags=''>
+            <output handler='uml-marte' path='C:\Users\lcroy\runtime-EclipseApplication\Test\netfdpim.uml'>
+                <metric name='respT' class='class1' confidence='mean' param='$LaunchFD' type='hostDemand' />
+            </output>
+        </resource>
+    </fitting>
+</fg>
