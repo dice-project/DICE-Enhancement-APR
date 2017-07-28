@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/uk.ac.ic.lqn.feature_0.1.0.201707251013.jar" id="uk.ac.ic.lqn.feature" version="0.1.0.201707251013">
-      <category name="uk.ac.ic.lqn.category"/>
-   </feature>
-   <category-def name="uk.ac.ic.lqn.category" label="Enhancement Category"/>
+   <feature url="features/uk.ac.ic.lqn.feature_0.1.0.201707281154.jar" id="uk.ac.ic.lqn.feature" version="0.1.0.201707281154"/>
 </site>
