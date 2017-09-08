@@ -83,15 +83,17 @@ public class FGAction implements IObjectActionDelegate {
 		         fileWriter.close();
 		    }catch (IOException e) {
 	            e.printStackTrace();
-	        }    
+	        }finally{
+	        	logFileForFG.deleteOnExit();
+	        }
 			
 			//Start APDR
 			MessageDialog.openConfirm(shell, "Enhancement-FG", "FG is going to run. Click buton to continue.");
 			try{
 				System.setOut(new PrintStream(new FileOutputStream(logFileForFG)));
 				maninFG = new DiceFGRC();
-				tempLocationOfConFile = tempLocationOfConFile.replace("file:/", "");
-				maninFG.dicefg(tempLocationOfConFile);
+				//tempLocationOfConFile = tempLocationOfConFile.replace("file:/", "");				
+				maninFG.dicefg(ConFile.getPath());
 				//read information from logfile
 				Reader reader = null;
 				BufferedReader br = null;
@@ -99,10 +101,11 @@ public class FGAction implements IObjectActionDelegate {
 				String data = null;
 				try {
 					reader = new FileReader(logFileForFG);
-					br = new BufferedReader(reader);						
+					br = new BufferedReader(reader);
+					String nextLine= System.getProperty("line.separator");
 					while ((data = br.readLine()) != null) 
 					{
-						sb.append(data+'\n');
+						sb.append(data + nextLine);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();

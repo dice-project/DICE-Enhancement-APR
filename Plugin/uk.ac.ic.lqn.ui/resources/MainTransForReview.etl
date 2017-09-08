@@ -276,10 +276,10 @@ rule ForkNode2Precedence
 	         lqnPre.activityRPre = activityRPre;
 	         //Reason?   
 	         lqnPrecedence.`pre` = lqnPre;
-	         "111".println();
+	         //"111".println();
 	         lqnPre.activityRPre.println();
 	         lqnPre.println();
-	         "222".println();
+	         //"222".println();
 	     }
 	          
 	     var actForPost : lqnmodel!activity;
@@ -1039,7 +1039,6 @@ operation EntryFunctionOperation(innode:Any,lqnTask:lqnmodel!task,partition:UML!
           	lqnTask.taskactivities.add(taskactivity);
           	"lqnTask.taskactivities is : ".print()+ lqnTask.taskactivities.println();
           	//Element: transformer the activity nodes (in current partitions) to lqn activities in current taskactivity 
-           	
            	taskactivity.activity.addAll(col.equivalent());
           	"taskactivity.activity".print() + taskactivity.activity.println();
             //Obtain the first item of this collection

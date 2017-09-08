@@ -9,10 +9,13 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Reader;
 import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.debug.ui.console.IConsole;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.epsilon.common.util.StringProperties;
@@ -39,6 +42,7 @@ import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.uml2.uml.UMLPackage;
+import org.osgi.framework.Bundle;
 import org.eclipse.emf.ecore.impl.*;
 import org.eclipse.ui.console.*;
 
@@ -87,7 +91,7 @@ public class TransformAction implements IObjectActionDelegate {
 			
 			//Pre-Treansformation for adding inpartition
 			eolModule.parse(URI.create("platform:/plugin/uk.ac.ic.lqn.ui/resources/PreTrans.eol"));
-			EmfModel eolModel = EmfModelFactory.getInstance().loadEmfModel("UML", new File(file.getLocationURI()), UMLPackage.eINSTANCE);
+			EmfModel eolModel = EmfModelFactory.getInstance().loadEmfModel("UML", new File(file.getLocationURI()), UMLPackage.eINSTANCE,EmfModelFactory.AccessMode.READ_WRITE);
 			
 			eolModule.getContext().getModelRepository().addModel(eolModel);
 			for (Variable parameter : parameters) {
@@ -102,15 +106,40 @@ public class TransformAction implements IObjectActionDelegate {
 			EtlModule etlModule = new EtlModule();
 			etlModule.parse(URI.create("platform:/plugin/uk.ac.ic.lqn.ui/resources/MainTransForReview.etl"));
 			
-			String tempLocationOfUMLModel = file.getLocationURI().toString();
-			String tempLocationOfLqnModel = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.indexOf(".")) + "LqnModel.model";
-			String tempLocationOfLqnFile = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.indexOf(".")) + ".lqnx";
-			String tempLocationOfLqnTraceModel = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.indexOf(".")) + "LqnTraceModel.model";
-			String tempLocationOfConFile = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "DICE-APR-Configuration.xml";
+			String tempLocationOfUMLModel = file.getLocationURI().toString();			
+			String tempLocationOfLqnModel = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "LqnModel.model";
+			String tempLocationOfLqnFile = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "LqnFile.lqnx";
+			String tempLocationOfLqnTraceModel = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "LqnTraceModel.model";
 			String tempLogFileForAPR = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "logForAPR.txt";
+			String tempLocationOfConFile = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "DICE-APR-Configuration.xml";
 			
+//			String tempLocationOfLINEFile = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "LqnFile.xml";
+//			String tempLocationOfSolvedLINEFile = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "LqnFile_line.xml";
+			
+			//Create a log file
+		    URI tempLogFileForAPRURI = new URI(tempLogFileForAPR);
+			File LogFileForAPR = new File(tempLogFileForAPRURI);
+		    try{
+		    	if (!LogFileForAPR.exists()){
+		    		LogFileForAPR.createNewFile() ;        
+		    	}
+		    	 FileWriter fileWriter =new FileWriter(LogFileForAPR);
+		         fileWriter.write("");
+		         fileWriter.flush();
+		         fileWriter.close();
+		    }catch (IOException e) {
+	            e.printStackTrace();
+	        }finally{
+	        	LogFileForAPR.deleteOnExit();
+	        }		    
+		    
+		    //Obtain the ecore files for the LQN and LQNTrace models
+			File LqnMetaFile = new File(FileLocator.toFileURL(URI.create("platform:/plugin/uk.ac.ic.lqn.ui/resources/lqnmodel.ecore").toURL()).getPath());
+			File TraceMetaFile = new File(FileLocator.toFileURL(URI.create("platform:/plugin/uk.ac.ic.lqn.ui/resources/Lqn2umlTrace.ecore").toURL()).getPath());
+			
+			//Create the LQN model
 			URI lqnModelURI = new URI(tempLocationOfLqnModel);
-			File lqnModel = new File(lqnModelURI) ;        
+			File lqnModel = new File(lqnModelURI);        
 		    try{
 				if (!lqnModel.exists()){
 			    	lqnModel.createNewFile() ;       
@@ -119,10 +148,14 @@ public class TransformAction implements IObjectActionDelegate {
 		         fileWriter.write("");
 		         fileWriter.flush();
 		         fileWriter.close();
+		         
 		    }catch (IOException e) {
 	            e.printStackTrace();
+	        }finally{
+	        	lqnModel.deleteOnExit();
 	        }
 		    
+		    //create LQN file according to the LQN model
 		    URI lqnFileURI = new URI(tempLocationOfLqnFile);
 			File lqnFile = new File(lqnFileURI) ;        
 		    try{
@@ -132,12 +165,14 @@ public class TransformAction implements IObjectActionDelegate {
 		    	 FileWriter fileWriter =new FileWriter(lqnFile);
 		         fileWriter.write("");
 		         fileWriter.flush();
-		         fileWriter.close();
+		         fileWriter.close();		         
 		    }catch (IOException e) {
 	            e.printStackTrace();
+	        }finally{
+	        	lqnFile.deleteOnExit();
 	        }
-		    
-		    
+		    		    
+		    //create LQN trace model
 		    URI lqnTraceModelURI = new URI(tempLocationOfLqnTraceModel);
 			File lqnTraceModel = new File(lqnTraceModelURI) ;        
 		    try{
@@ -150,32 +185,25 @@ public class TransformAction implements IObjectActionDelegate {
 		         fileWriter.close();
 		    }catch (IOException e) {
 	            e.printStackTrace();
-	        }
+	        }finally{
+	        	lqnTraceModel.deleteOnExit();
+	        }		    
 		    
+		    //Create a Configuration File for APR 
 		    URI ConFileURI = new URI(tempLocationOfConFile);
 			File ConFile = new File(ConFileURI) ;        
 		    if (!ConFile.exists()){
 		    	ConFile.createNewFile() ;        
 		    }
-		    
-		    URI tempLogFileForAPRURI = new URI(tempLogFileForAPR);
-			File LogFileForAPR = new File(tempLogFileForAPRURI) ;        
-		    try{
-		    	if (!LogFileForAPR.exists()){
-		    		LogFileForAPR.createNewFile() ;        
-		    	}
-		    	 FileWriter fileWriter =new FileWriter(LogFileForAPR);
-		         fileWriter.write("");
-		         fileWriter.flush();
-		         fileWriter.close();
-		    }catch (IOException e) {
-	            e.printStackTrace();
-	        }
-		    
+		 
 		    //Load source model, target model and trace model
 			EmfModel etlModelUML = EmfModelFactory.getInstance().loadEmfModel("UML", new File(file.getLocationURI()), UMLPackage.eINSTANCE,EmfModelFactory.AccessMode.READ_ONLY);
-			EmfModel etlModelLQN = EmfModelFactory.getInstance().loadEmfModel("lqnmodel", lqnModel, LqnmodelPackage.eINSTANCE,EmfModelFactory.AccessMode.WRITE_ONLY);
-			EmfModel etlModelLQNTrace = EmfModelFactory.getInstance().loadEmfModel("Trace", lqnTraceModel,Lqn2umlTracePackage.eINSTANCE,EmfModelFactory.AccessMode.WRITE_ONLY);
+			//Not working when using eInstance
+			//EmfModel etlModelLQN = EmfModelFactory.getInstance().loadEmfModel("lqnmodel", lqnModel, LqnmodelPackage.eINSTANCE,EmfModelFactory.AccessMode.WRITE_ONLY);
+			//EmfModel etlModelLQNTrace = EmfModelFactory.getInstance().loadEmfModel("Trace", lqnTraceModel,Lqn2umlTracePackage.eINSTANCE,EmfModelFactory.AccessMode.WRITE_ONLY);
+			//Using ecore instead
+			EmfModel etlModelLQN = EmfModelFactory.getInstance().loadEmfModel("lqnmodel", lqnModel, LqnMetaFile,EmfModelFactory.AccessMode.WRITE_ONLY);
+			EmfModel etlModelLQNTrace = EmfModelFactory.getInstance().loadEmfModel("Trace", lqnTraceModel,TraceMetaFile,EmfModelFactory.AccessMode.WRITE_ONLY);
 			
 			etlModule.getContext().getModelRepository().addModel(etlModelUML);
 			etlModule.getContext().getModelRepository().addModel(etlModelLQN);
@@ -199,9 +227,21 @@ public class TransformAction implements IObjectActionDelegate {
 				MessageDialog.openInformation(shell, "Confirm", "The APDR process starts...");
 				try{
 					maninAPDR = new DiceAPDR();
-					tempLocationOfConFile = tempLocationOfConFile.replace("file:/", "");
-					tempLocationOfLqnFile = tempLocationOfLqnFile.replace("file:/", "");
-					maninAPDR.APDR(tempLocationOfConFile,tempLocationOfLqnFile);
+					//tempLocationOfConFile = tempLocationOfConFile.replace("file:/", "");
+					//tempLocationOfLqnFile = tempLocationOfLqnFile.replace("file:/", "");
+					maninAPDR.APDR(ConFile.getPath(),lqnFile.getPath());
+//					//delete tem LINE and Solved LINE file
+//					URI LINEFileURI = new URI(tempLocationOfLINEFile);
+//					File LINEFile = new File(LINEFileURI.getPath());
+//					if (LINEFile.exists()){
+//						LINEFile.deleteOnExit();
+//					}
+//					URI SolvedLINEFileURI = new URI(tempLocationOfSolvedLINEFile);
+//					File SolvedLINEFile = new File(SolvedLINEFileURI.getPath());
+//					if (SolvedLINEFile.exists()){
+//						SolvedLINEFile.deleteOnExit();
+//					}
+					
 					//read information from logfile
 					Reader reader = null;
 					BufferedReader br = null;
@@ -209,10 +249,11 @@ public class TransformAction implements IObjectActionDelegate {
 					String data = null;
 					try {
 						reader = new FileReader(LogFileForAPR);
-						br = new BufferedReader(reader);						
+						br = new BufferedReader(reader);
+						String nextLine= System.getProperty("line.separator");
 						while ((data = br.readLine()) != null) 
 						{
-							sb.append(data+'\n');
+							sb.append(data+nextLine);
 						}
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -224,7 +265,7 @@ public class TransformAction implements IObjectActionDelegate {
 							e.printStackTrace();
 						}
 					}
-					printToConsole(sb.toString(),true);					
+					printToConsole(sb.toString(),true);				
 				}catch(MWException e){
 					System.out.println("The anti-patterns detection and refactoring is not executed due to execeptions.");
 				}				

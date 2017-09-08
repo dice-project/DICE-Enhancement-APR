@@ -89,8 +89,8 @@ public class LabelRep {
 		String toBeReplaced23 = "hostdemandmean";
 		String toBeReplacedBy23 = "host-demand-mean";
 		
-		String toBeReplace24 =">";
-		String toBeReplacedBy24 = ">" +"\n";
+		//String toBeReplace24 =">";
+		//String toBeReplacedBy24 = ">" +"\n";
 		
 		try {
 			//Source model file which needs to be replaced its labels (reading the file into a string)
@@ -124,7 +124,7 @@ public class LabelRep {
 			newFileContent = newFileContent.replaceAll(toBeReplacedxmi, toBeReplacedByxmi);
 			newFileContent = newFileContent.replaceAll(toBeReplacedxmlns, toBeReplacedByxmlns);
 			
-			newFileContent = newFileContent.replaceAll(toBeReplace24, toBeReplacedBy24);
+			//newFileContent = newFileContent.replaceAll(toBeReplace24, toBeReplacedBy24);
 			
 			//Writing the new contents into the target model file
 			writeFile(newFileContent, outputName);
@@ -143,9 +143,10 @@ public class LabelRep {
 		try (BufferedReader br = new BufferedReader(new FileReader(filepath)))
 		{
 			String line = br.readLine();
+			String nextLine= System.getProperty("line.separator");
 			while (line != null)
 			{
-				sb.append(line);
+				sb.append(line + nextLine);
 				line = br.readLine();
 			}
 		}
