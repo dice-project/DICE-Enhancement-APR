@@ -5,6 +5,7 @@
    <extension
          point="org.eclipse.ui.popupMenus">
       <objectContribution
+            adaptable="true"
             id="uk.ac.ic.lqn.ui.contribution1"
             nameFilter="*.uml"
             objectClass="org.eclipse.core.resources.IFile">

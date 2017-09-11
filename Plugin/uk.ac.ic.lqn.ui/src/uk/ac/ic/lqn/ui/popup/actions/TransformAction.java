@@ -113,24 +113,25 @@ public class TransformAction implements IObjectActionDelegate {
 			String tempLogFileForAPR = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "logForAPR.txt";
 			String tempLocationOfConFile = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "DICE-APR-Configuration.xml";
 			
-//			String tempLocationOfLINEFile = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "LqnFile.xml";
-//			String tempLocationOfSolvedLINEFile = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "LqnFile_line.xml";
+			String tempLocationOfLINEFile = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "LqnFile.xml";
+			String tempLocationOfSolvedLINEFile = tempLocationOfUMLModel.substring(0,tempLocationOfUMLModel.lastIndexOf("/")+1) + "LqnFile_line.xml";
 			
 			//Create a log file
 		    URI tempLogFileForAPRURI = new URI(tempLogFileForAPR);
 			File LogFileForAPR = new File(tempLogFileForAPRURI);
+			FileWriter fileWriter = null;
 		    try{
 		    	if (!LogFileForAPR.exists()){
 		    		LogFileForAPR.createNewFile() ;        
 		    	}
-		    	 FileWriter fileWriter =new FileWriter(LogFileForAPR);
+		    	 fileWriter =new FileWriter(LogFileForAPR);
 		         fileWriter.write("");
 		         fileWriter.flush();
-		         fileWriter.close();
 		    }catch (IOException e) {
 	            e.printStackTrace();
 	        }finally{
-	        	LogFileForAPR.deleteOnExit();
+		        fileWriter.close();
+		        LogFileForAPR.deleteOnExit();
 	        }		    
 		    
 		    //Obtain the ecore files for the LQN and LQNTrace models
@@ -144,14 +145,13 @@ public class TransformAction implements IObjectActionDelegate {
 				if (!lqnModel.exists()){
 			    	lqnModel.createNewFile() ;       
 			    }
-				 FileWriter fileWriter =new FileWriter(lqnModel);
+				 fileWriter =new FileWriter(lqnModel);
 		         fileWriter.write("");
 		         fileWriter.flush();
-		         fileWriter.close();
-		         
 		    }catch (IOException e) {
 	            e.printStackTrace();
 	        }finally{
+	        	fileWriter.close();
 	        	lqnModel.deleteOnExit();
 	        }
 		    
@@ -162,13 +162,13 @@ public class TransformAction implements IObjectActionDelegate {
 		    	if (!lqnFile.exists()){
 		    		lqnFile.createNewFile() ;        
 		    	}
-		    	 FileWriter fileWriter =new FileWriter(lqnFile);
+		    	 fileWriter =new FileWriter(lqnFile);
 		         fileWriter.write("");
 		         fileWriter.flush();
-		         fileWriter.close();		         
 		    }catch (IOException e) {
 	            e.printStackTrace();
 	        }finally{
+	        	fileWriter.close();
 	        	lqnFile.deleteOnExit();
 	        }
 		    		    
@@ -179,13 +179,13 @@ public class TransformAction implements IObjectActionDelegate {
 		    	if (!lqnTraceModel.exists()){
 		    		lqnTraceModel.createNewFile() ;        
 		    	}
-		    	 FileWriter fileWriter =new FileWriter(lqnTraceModel);
+		    	 fileWriter =new FileWriter(lqnTraceModel);
 		         fileWriter.write("");
 		         fileWriter.flush();
-		         fileWriter.close();
 		    }catch (IOException e) {
 	            e.printStackTrace();
 	        }finally{
+	        	fileWriter.close();
 	        	lqnTraceModel.deleteOnExit();
 	        }		    
 		    
@@ -230,18 +230,17 @@ public class TransformAction implements IObjectActionDelegate {
 					//tempLocationOfConFile = tempLocationOfConFile.replace("file:/", "");
 					//tempLocationOfLqnFile = tempLocationOfLqnFile.replace("file:/", "");
 					maninAPDR.APDR(ConFile.getPath(),lqnFile.getPath());
-//					//delete tem LINE and Solved LINE file
-//					URI LINEFileURI = new URI(tempLocationOfLINEFile);
-//					File LINEFile = new File(LINEFileURI.getPath());
-//					if (LINEFile.exists()){
-//						LINEFile.deleteOnExit();
-//					}
-//					URI SolvedLINEFileURI = new URI(tempLocationOfSolvedLINEFile);
-//					File SolvedLINEFile = new File(SolvedLINEFileURI.getPath());
-//					if (SolvedLINEFile.exists()){
-//						SolvedLINEFile.deleteOnExit();
-//					}
-					
+					//delete tem LINE and Solved LINE file
+					URI LINEFileURI = new URI(tempLocationOfLINEFile);
+					File LINEFile = new File(LINEFileURI.getPath());
+					if (LINEFile.exists()){
+						LINEFile.deleteOnExit();
+					}
+					URI SolvedLINEFileURI = new URI(tempLocationOfSolvedLINEFile);
+					File SolvedLINEFile = new File(SolvedLINEFileURI.getPath());
+					if (SolvedLINEFile.exists()){
+						SolvedLINEFile.deleteOnExit();
+					}					
 					//read information from logfile
 					Reader reader = null;
 					BufferedReader br = null;
