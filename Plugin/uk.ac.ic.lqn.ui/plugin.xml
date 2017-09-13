@@ -10,7 +10,7 @@
             nameFilter="*.uml"
             objectClass="org.eclipse.core.resources.IFile">
          <menu
-               label="Enhancement Tool"
+               label="DICE Enhancement Tool"
                path="additions"
                id="uk.ac.ic.lqn.ui.menu1">
             <separator

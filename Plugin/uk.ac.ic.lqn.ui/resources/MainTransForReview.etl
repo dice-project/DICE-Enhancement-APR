@@ -237,20 +237,20 @@ rule OpaqueAction2Activity
 	                 "value of prob  is : ".print()+action.getValue(s,"prob").asReal().println();
 	                 "Type of the value of prob  is : ".print() + action.getValue(s,"prob").asReal().type().println();
 	           }
-	    }else{
-	    	if(s.name="GaStep"){	    	   
-	    	   "Stereotypes is : ".print()+s.println();
-	    	   "Selected Attributes are :".print() + s.getAllAttributes().name.println();           
-	          	           
-	           if(s.getAllAttributes().selectOne(a|a.name="hostDemand").isDefined()){
-	                 "value of hostDemand  is : ".print() + action.getValue(s,"hostDemand").first().asReal().println();
-	                 "Type of the value of hostDemand  is : ".print()+action.getValue(s,"hostDemand").first().asReal().type().println();
-	                 activity.hostdemandmean=action.getValue(s,"hostDemand").first().asReal();
-	                 " activity.hostDemand is : ".print()+activity.hostdemandmean.println();
-	                 " activity.hostDemand type is : ".print()+activity.hostdemandmean.type().println();     
-	           }
-	        }	
 	    }
+	    	//if(s.name="GaStep"){	    	   
+	    	//   "Stereotypes is : ".print()+s.println();
+	    	//   "Selected Attributes are :".print() + s.getAllAttributes().name.println();           
+	          	           
+	        //   if(s.getAllAttributes().selectOne(a|a.name="hostDemand").isDefined()){
+	        //         "value of hostDemand  is : ".print() + action.getValue(s,"hostDemand").first().asReal().println();
+	        //         "Type of the value of hostDemand  is : ".print()+action.getValue(s,"hostDemand").first().asReal().type().println();
+	        //         activity.hostdemandmean=action.getValue(s,"hostDemand").first().asReal();
+	        //         " activity.hostDemand is : ".print()+activity.hostdemandmean.println();
+	        //         " activity.hostDemand type is : ".print()+activity.hostdemandmean.type().println();     
+	        //   }
+	       // }	
+	    
 	 }
    }   
 	
@@ -991,15 +991,16 @@ operation getBlockTOfOpAction(a:UML!OpaqueAction):Real{
                }
             }
             //TBD: Keep this for general situation
-            if(s.name="GaStep"){
-	    	   "stereotypes is : ".print() + s.println();
-	    	   "Selected Attributes are :".print() + s.getAllAttributes().name.println();	            
-	           if(s.getAllAttributes().selectOne(a|a.name="blockT").isDefined() ){
-	             "value of Blockt is : ".print() + a.getValue(s,"blockT").asReal().println();
-	             "Type of the value of capacity  is : ".print()+a.getValue(s,"blockT").asReal().type().println();      
-	             blockT = a.getValue(s,"blockT").asReal(); 
-               }
-            }
+	            //if(s.name="GaStep"){
+		    	   //"stereotypes is : ".print() + s.println();
+		    	   //"Selected Attributes are :".print() + s.getAllAttributes().name.println();	            
+		           //if(s.getAllAttributes().selectOne(a|a.name="blockT").isDefined() ){
+		             //"value of Blockt is : ".print() + a.getValue(s,"blockT").asReal().println();
+		             //"Type of the value of capacity  is : ".print()+a.getValue(s,"blockT").asReal().type().println();      
+		             //blockT = a.getValue(s,"blockT").asReal(); 
+	               //}
+	            //}
+            
          }
      }
      return blockT;	 
@@ -1449,17 +1450,17 @@ operation ReturnProbability(action:UML!Action):Real{
      	if(stereotype.isDefined()){   
 	    	for(s in stereotype){      
 				//Keep for general
-				if(s.name="GaStep"){
-	    	    	"Stereotypes is : ".print() + s.println();
-	    	      	"Selected Attributes are :".print() + s.getAllAttributes().name.println();
+				//if(s.name="GaStep"){
+	    	    //	"Stereotypes is : ".print() + s.println();
+	    	    //  	"Selected Attributes are :".print() + s.getAllAttributes().name.println();
 	    	 
-	              	if(s.getAllAttributes().selectOne(a|a.name = "prob").isDefined() ){
-	                	"value of prob  is : ".print() + action.getValue(s,"prob").asReal().println();
-	                   	"Type of the value of prob  is : ".print() + action.getValue(s,"prob").asReal().type().println();
+	            //  	if(s.getAllAttributes().selectOne(a|a.name = "prob").isDefined() ){
+	            //    	"value of prob  is : ".print() + action.getValue(s,"prob").asReal().println();
+	            //       	"Type of the value of prob  is : ".print() + action.getValue(s,"prob").asReal().type().println();
 		             	//return the probability;
-                     	return action.getValue(s,"prob").asReal();
-                   	}
-                 }
+                //     	return action.getValue(s,"prob").asReal();
+                //   	}
+                // }
                 if((s.name="StormBolt")or (s.name="StormSpout")){
 	    	    	"Stereotypes is : ".print() + s.println();
 	    	      	"Selected Attributes are :".print() + s.getAllAttributes().name.println();
