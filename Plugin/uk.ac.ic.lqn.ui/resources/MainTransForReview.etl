@@ -237,6 +237,19 @@ rule OpaqueAction2Activity
 	                 "value of prob  is : ".print()+action.getValue(s,"prob").asReal().println();
 	                 "Type of the value of prob  is : ".print() + action.getValue(s,"prob").asReal().type().println();
 	           }
+	    }else{
+	    	if(s.name="GaStep"){	    	   
+	    	   "Stereotypes is : ".print()+s.println();
+	    	   "Selected Attributes are :".print() + s.getAllAttributes().name.println();           
+	          	           
+	           if(s.getAllAttributes().selectOne(a|a.name="hostDemand").isDefined()){
+	                 "value of hostDemand  is : ".print() + action.getValue(s,"hostDemand").first().asReal().println();
+	                 "Type of the value of hostDemand  is : ".print()+action.getValue(s,"hostDemand").first().asReal().type().println();
+	                 activity.hostdemandmean=action.getValue(s,"hostDemand").first().asReal();
+	                 " activity.hostDemand is : ".print()+activity.hostdemandmean.println();
+	                 " activity.hostDemand type is : ".print()+activity.hostdemandmean.type().println();     
+	           }
+	        }	
 	    }
 	 }
    }   

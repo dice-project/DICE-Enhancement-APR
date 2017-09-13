@@ -9,46 +9,47 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.Reader;
 import java.net.URI;
-import java.net.URL;
+//import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
-import org.eclipse.debug.ui.console.IConsole;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.epsilon.common.util.StringProperties;
+//import org.eclipse.core.runtime.Platform;
+//import org.eclipse.debug.ui.console.IConsole;
+//import org.eclipse.emf.ecore.resource.ResourceSet;
+//import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.emc.emf.EmfModelFactory;
-import org.eclipse.epsilon.emc.emf.InMemoryEmfModel;
-import org.eclipse.epsilon.etl.IEtlModule;
+//import org.eclipse.epsilon.emc.emf.InMemoryEmfModel;
+//import org.eclipse.epsilon.etl.IEtlModule;
 import org.eclipse.epsilon.etl.EtlModule;
-import org.eclipse.epsilon.etl.execute.context.*;
-import org.eclipse.epsilon.etl.execute.operations.*;
+//import org.eclipse.epsilon.etl.execute.context.*;
+//import org.eclipse.epsilon.etl.execute.operations.*;
 import org.eclipse.epsilon.eol.EolModule;
-import org.eclipse.epsilon.eol.IEolModule;
+//import org.eclipse.epsilon.eol.IEolModule;
 import org.eclipse.epsilon.eol.execute.context.Variable;
-import org.eclipse.epsilon.eol.models.IModel;
+//import org.eclipse.epsilon.eol.models.IModel;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.PopupDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.console.ConsolePlugin;
-import org.eclipse.ui.console.IConsoleManager;
-import org.eclipse.ui.console.MessageConsole;
+//import org.eclipse.ui.console.ConsolePlugin;
+//import org.eclipse.ui.console.IConsoleManager;
+//import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
 import org.eclipse.uml2.uml.UMLPackage;
-import org.osgi.framework.Bundle;
-import org.eclipse.emf.ecore.impl.*;
-import org.eclipse.ui.console.*;
+//import org.osgi.framework.Bundle;
+//import org.eclipse.emf.ecore.impl.*;
+//import org.eclipse.ui.console.*;
 
-import uk.ac.ic.lqn.Lqn2umlTrace.Lqn2umlTracePackage;
-import uk.ac.ic.lqn.lqnmodel.LqnmodelPackage;
-import uk.ac.ic.lqn.lqnmodel.impl.LqnmodelPackageImpl;
+//import uk.ac.ic.lqn.Lqn2umlTrace.Lqn2umlTracePackage;
+//import uk.ac.ic.lqn.lqnmodel.LqnmodelPackage;
+//import uk.ac.ic.lqn.lqnmodel.impl.LqnmodelPackageImpl;
 
 import com.mathworks.toolbox.javabuilder.*;
 import APDR.*;
@@ -264,10 +265,12 @@ public class TransformAction implements IObjectActionDelegate {
 							e.printStackTrace();
 						}
 					}
-					printToConsole(sb.toString(),true);				
+					printToConsole(sb.toString(),true);
+					//MessageDialog.openInformation(shell, "APR Result", sb.toString());
 				}catch(MWException e){
 					System.out.println("The anti-patterns detection and refactoring is not executed due to execeptions.");
-				}				
+				}
+				
 			}else
 			{
 				MessageDialog.openInformation(shell, "Cancellation", "The APDR process is terminated.");

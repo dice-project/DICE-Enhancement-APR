@@ -128,7 +128,7 @@ public class LabelRep {
 			
 			//Writing the new contents into the target model file
 			writeFile(newFileContent, outputName);
-			System.out.print(newFileContent);
+			//System.out.print(newFileContent);
 		}
 		catch(IOException e)
 		{
