@@ -88,7 +88,7 @@ public class FGAction implements IObjectActionDelegate {
 	        }
 			
 			//Start APDR
-			MessageDialog.openConfirm(shell, "Enhancement-FG", "FG is going to run. Click buton to continue.");
+			MessageDialog.openConfirm(shell, "Enhancement-FG", "FG is going to run. Click button to continue.");
 			try{
 				System.setOut(new PrintStream(new FileOutputStream(logFileForFG)));
 				maninFG = new DiceFGRC();

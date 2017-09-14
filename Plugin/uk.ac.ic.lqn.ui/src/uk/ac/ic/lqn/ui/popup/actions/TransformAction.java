@@ -223,7 +223,7 @@ public class TransformAction implements IObjectActionDelegate {
 			LabelRep.replace(value);
 			
 			//Start APDR
-			if (MessageDialog.openConfirm(shell, "Enhancement-APR", "Performance model is generated. Click buton to perform Anti-Patterns Detection and Refactoring(APDR)."))
+			if (MessageDialog.openConfirm(shell, "Enhancement-APR", "Performance model is generated. Click button to perform Anti-Patterns Detection and Refactoring(APDR)."))
 			{
 				MessageDialog.openInformation(shell, "Confirm", "The APDR process starts...");
 				try{
